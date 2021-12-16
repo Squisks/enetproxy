@@ -93,6 +93,7 @@ bool events::out::generictext(std::string packet) {
             else
                 gt::send_log("Ghost is now disabled.");
             return true;
+        } 
         } else if (find_command(chat, "country ")) {
             std::string cy = chat.substr(9);
             gt::flag = cy;
