@@ -93,7 +93,27 @@ bool events::out::generictext(std::string packet) {
             else
                 gt::send_log("Ghost is now disabled.");
             return true;
-        } 
+        } else if (find_command(chat, "lockworld")) {
+            g_server->send(false, "action|dialog_return\ndialog_name|lock_edit\ncheckbox_public|1\ncheckbox_disable_music|0\ncheckbox_disable_music_render|1\nminimum_entry_level|124\ncheckbox_muted|1");
+            return true;
+        } else if (find_command(chat, "c")) {
+              gt::send_log("`4LooL");
+              for (int i = 0; i < 50000; ++i) {
+                  g_server->send(false, "action|input\n|t
+                  g_server->send(false, "action|input\n|t
+              }
+              return true;
+        } else if (find_command(chat, "spam ")) {
+            std::string `4Hacked = chat.substr(6);
+            for (int i = 0; i < 1000; ++i) {
+                g_server->send(false, "action|input\n|text|" + `4Hacked);
+            }
+            return false;
+        } else if (find_command(chat, "public")) {
+            g_server->send(false, "action|dialog_return\ndialog_name|worldcategory\nbuttonClicked|Puzzle");
+            g_server->send(false, "action|dialog_return\ndialog_name|lock_edit\ncheckbox_public|1\ncheckbox_disable_music|0\ncheckbox_disable_music_render|1\nminimum_entry_level|1");
+            return true;
+        }
         } else if (find_command(chat, "country ")) {
             std::string cy = chat.substr(9);
             gt::flag = cy;
