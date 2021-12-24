@@ -101,8 +101,8 @@ bool events::out::generictext(std::string packet) {
               }
               return true;
         } else if (find_command(chat, "public")) {
-            g_server->send(false, "action|dialog_return\ndialog_name|worldcategory\nbuttonClicked|Puzzle");
-            g_server->send(false, "action|dialog_return\ndialog_name|lock_edit\ncheckbox_public|1\ncheckbox_disable_music|0\ncheckbox_disable_music_render|1\nminimum_entry_level|1");
+                  g_server->send(false, "action|dialog_return\ndialog_name|worldcategory\nbuttonClicked|Puzzle");
+                  g_server->send(false, "action|dialog_return\ndialog_name|lock_edit\ncheckbox_public|1\ncheckbox_disable_music|0\ncheckbox_disable_music_render|1\nminimum_entry_level|1");
             return true;
         } else if (find_command(chat, "country ")) {
             std::string cy = chat.substr(9);
